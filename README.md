@@ -11,7 +11,7 @@
 
 ---
 
-# 📖 Project Overview
+# 📖 Project Overview -
 
 This project builds an enterprise-level **AI-powered Knowledge Graph system** from structured and unstructured customer support data.
 
@@ -54,6 +54,9 @@ Semantic Search
 Retrieval-Augmented Generation (Groq API + Llama 3.1)
 ```
 
+
+
+(full pipeline):
 ---
 
 # 🚀 Technologies Used
