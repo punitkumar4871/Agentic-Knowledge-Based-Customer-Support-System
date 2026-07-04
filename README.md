@@ -98,5 +98,32 @@ git clone <your-repo-url>
 cd AI-Knowledge-Graph-Builder
 pip install -r requirements.txt
 ```
+# ✅ Milestone 1 – Data Ingestion & Preprocessing
+
+### Tasks Completed
+- Data cleaning using Pandas.
+- Removal of null values and duplicates.
+- Data normalization and feature enrichment.
+- Processed dataset generation.
+
+### Output
+```text
+cleaned_tickets.xlsx
+```
+
+---
+
+# ✅ Milestone 2 – Entity Extraction & Graph Construction
+
+## Step 1: Structured Triple Extraction
+Extracted **entity–relationship–entity triples** from structured columns.
+*Example triples:*
+```text
+Customer → RAISED → Ticket
+Ticket → HAS_SEVERITY → Severity
+Ticket → SUBMITTED_VIA → Channel
+```
+**Output:** `structured_triples.csv`
+
 
 Further setup instructions will be added as the project develops.
