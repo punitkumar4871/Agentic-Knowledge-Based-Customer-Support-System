@@ -12,7 +12,7 @@
 ----
 
 # 📖 Project Overview
-
+overview:
 This project builds an enterprise-level **AI-powered Knowledge Graph system** from structured and unstructured customer support data. 
 
 The system extracts entities and relationships from support tickets, constructs a **dynamic knowledge graph**, and enables **intelligent semantic search with a Retrieval-Augmented Generation (RAG) pipeline**. By moving completely to the cloud, it provides high-speed automated troubleshooting responses via an interactive graph dashboard.
