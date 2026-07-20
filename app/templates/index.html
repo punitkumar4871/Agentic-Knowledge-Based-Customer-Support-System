@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KGB Enterprise Intelligence</title>
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- ════════════════════════════════════
+     LEFT SIDEBAR — nav + KPIs only
+════════════════════════════════════ -->
+<header class="main-header">
+
+    <div class="header-content">
+        <div class="kgb-icon">KGB</div>
+        <div class="header-titles">
+            <h1>Enterprise Intelligence</h1>
+            <h2>Knowledge Graph Builder</h2>
+        </div>
+    </div>
+
+    <section class="kpi-section">
+        <div class="kpi-card">
+            <span class="kpi-icon">◈</span>
+            <div class="kpi-meta">
+                <div class="kpi-value">164</div>
+                <div class="kpi-label">Entities</div>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <span class="kpi-icon">⬡</span>
+            <div class="kpi-meta">
+                <div class="kpi-value">305</div>
+                <div class="kpi-label">Relationships</div>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <span class="kpi-icon">◉</span>
+            <div class="kpi-meta">
+                <div class="kpi-value glow-text"><span class="status-pip"></span>Online</div>
+                <div class="kpi-label">Llama 3.1</div>
+            </div>
+        </div>
+    </section>
+
+    <div style="padding: 8px 22px 4px; border-bottom: 1px solid var(--navy-rim); flex-shrink:0;">
+        <div class="header-titles">
+            <nav>
+                <a href="/admin">⬡ &nbsp;Agent Console</a>
+                <a href="/queue" class="hitl-badge" style="margin-top:10px; text-decoration:none;">⚠ HITL Security Queue</a>
+                <a href="/admin-logout" style="margin-top:10px; text-decoration:none; font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--white-ghost); display:block;">⎋ &nbsp;Logout</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="sidebar-footer">
+        <p>
+            <span class="dev-name">Ansh</span>, <span class="dev-name">Punit</span> &amp; <span class="dev-name">Satwik</span>
+        </p>
+        <span class="copyright">© 2026 KGB · All rights reserved</span>
+    </div>
+
+</header>
+
+<!-- ════════════════════════════════════
+     CENTER — Graph hero
+════════════════════════════════════ -->
+<main class="main-stage">
+    <div class="graph-container">
+
+        <div class="panel-header">
+            Knowledge Graph Explorer
+            <div class="graph-search-wrapper">
+                <input type="text" id="graphSearch" placeholder="Find entity…" oninput="searchNode()">
+            </div>
+        </div>
+
+        <div id="mynetwork"></div>
+
+        <div id="mini-intel-box" class="mini-box hidden">
+            <span id="entity-name-display"></span>
+        </div>
+
+        <div id="graph-legend" class="glass-panel">
+            <div class="legend-header">Legend</div>
+            <div class="legend-item"><span class="legend-dot ticket"></span> Ticket</div>
+            <div class="legend-item"><span class="legend-dot server"></span> Server</div>
+            <div class="legend-item"><span class="legend-dot user"></span> User</div>
+            <div class="legend-item"><span class="legend-dot issue"></span> Issue</div>
+            <div class="legend-item"><span class="legend-dot device"></span> Device</div>
+            <div class="legend-item"><span class="legend-dot other"></span> Others</div>
+        </div>
+
+    </div>
+</main>
+
+<!-- ════════════════════════════════════
+     RIGHT PANEL — Chat (full height)
+════════════════════════════════════ -->
+<div class="chat-container">
+
+    <div class="chat-panel-header">
+        <div class="chat-panel-title">Intelligent Agent</div>
+        <div class="chat-panel-subtitle">Ask anything about your graph</div>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+        <div class="message bot-message">Neural interface active. How can I assist?</div>
+    </div>
+
+    <div class="chat-input-area">
+        <input type="text" id="userInput" placeholder="Query the knowledge graph…" onkeypress="handleKeyPress(event)">
+        <button class="analyze-btn" onclick="sendMessage()">Analyze</button>
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

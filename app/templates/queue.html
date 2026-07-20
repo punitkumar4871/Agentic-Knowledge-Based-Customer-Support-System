@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KGB — HITL Security Queue</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="queue-page">
+
+<div class="queue-topbar">
+    <div class="queue-brand">
+        <div class="kgb-icon">KGB</div>
+        <div>
+            <h1>Security Console</h1>
+            <h2>Human-in-the-Loop Queue</h2>
+        </div>
+    </div>
+    <a href="/admin" class="back-link">← Agent Console</a>
+</div>
+
+<div class="queue-wrapper">
+    <div class="queue-heading">Review Queue</div>
+    <div class="queue-sub">Flagged items pending human authorization</div>
+
+    {% if queue|length == 0 %}
+        <div class="queue-empty">
+            <span class="queue-empty-icon">◎</span>
+            No pending tickets — system secure
+        </div>
+    {% else %}
+        {% for ticket in queue %}
+        <div class="ticket-card" id="ticket-{{ ticket.id }}">
+            <div class="flag-reason">⚠ {{ ticket.flag }}</div>
+            <p><strong>User Query</strong>{{ ticket.query }}</p>
+            <div style="background:rgba(10,18,37,0.6); border:1px solid var(--navy-rim); border-radius:4px; padding:16px 18px; margin:14px 0;">
+                <span style="font-family:'IBM Plex Mono',monospace; font-size:0.56rem; font-weight:400; letter-spacing:0.2em; text-transform:uppercase; color:var(--white-ghost); display:block; margin-bottom:8px;">AI Draft Resolution</span>
+                <span style="font-size:0.87rem; font-weight:300; line-height:1.7; color:var(--white-dim);">{{ ticket.draft }}</span>
+            </div>
+            <div class="ticket-actions">
+                <button class="action-btn btn-approve" onclick="resolveTicket('{{ ticket.id }}', 'approve')">✓ Authorize</button>
+                <button class="action-btn btn-reject"  onclick="resolveTicket('{{ ticket.id }}', 'reject')">✕ Reject</button>
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<script>
+    async function resolveTicket(ticketId, action) {
+        const response = await fetch(`/api/queue/action/${ticketId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: action })
+        });
+        if (response.ok) {
+            const el = document.getElementById(`ticket-${ticketId}`);
+            el.style.transition = 'opacity 0.35s, transform 0.3s';
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(-6px)';
+            setTimeout(() => el.remove(), 370);
+        }
+    }
+</script>
+</body>
+</html>
